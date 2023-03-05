@@ -1,0 +1,12 @@
+# ------------------------------------------------------------------------------
+# Custom created module for [website] website
+# ------------------------------------------------------------------------------
+name: 'TestTask'
+type: 'module'
+description: 'TestTask for Firebird tours'
+package: 'Custom modules'
+version: '8.x-1.0'
+core: '8.x'
+core_version_requirement: ^8 || ^9
+
+configure: testtask.main_settings

@@ -1,0 +1,15 @@
+testtask.page:
+  path: '/exchange'
+  defaults:
+    _form: '\Drupal\testtask\Form\ExchangeForm'
+    _title: 'Exchange form'
+  requirements:
+    _permission: 'access content'
+
+testtask.adminpage:
+  path: '/admin/rates'
+  defaults:
+    _form: '\Drupal\testtask\Form\AdminForm'
+    _title: 'Rates page'
+  requirements:
+    _permission: 'access content'

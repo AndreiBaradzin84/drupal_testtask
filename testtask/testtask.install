@@ -1,0 +1,117 @@
+<?php
+
+/**
+ * @return void
+ */
+function testtask_install(): void {
+  $id = \Drupal::database()->insert('testtask_exchangers')
+    ->fields([
+      'name' => 'fixer.io',
+      'url' => 'https://api.apilayer.com/fixer/latest?&base=USD',
+      'key' => 'TdIyd6oAt1QhK3MkzFt1NUsLNOrsRI1d',
+    ])
+    ->execute();
+
+  //TODO: Set id programatically in cycle for all exchangers in cycle
+  \Drupal::service('testtask.exchanger')
+    ->setExchangerId(1)
+    ->setup()
+    ->getCurrencyNames()
+    ->getCurrencyRates();
+
+
+}
+
+/**
+ * @return array
+ */
+function testtask_schema(): array {
+
+  $schema['testtask_currencies'] = [
+    'description' => 'testtask currencies schema',
+    'fields' => [
+      'id' => [
+        'description' => 'id',
+        'type' => 'serial',
+        'size' => 'small',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'exchanger_id' => [
+        'description' => 'id of exchanger',
+        'type' => 'int',
+        'size' => 'small',
+        'unsigned' => TRUE,
+      ],
+      'code' => [
+        'description' => 'currency code',
+        'type' => 'varchar',
+        'length' => 3,
+        'default' => '',
+        'not null' => TRUE,
+      ],
+      'name' => [
+        'description' => 'currency name',
+        'type' => 'varchar',
+        'length' => 100,
+        'default' => '',
+        'not null' => TRUE,
+      ],
+      'rate' => [
+        'description' => 'currency rate',
+        'type' => 'float',
+        'unsigned' => TRUE,
+      ],
+      'available' => [
+        'description' => 'available for exchangeForm',
+        'type' => 'varchar',
+        'length' => 1,
+        'default' => '',
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  $schema['testtask_exchangers'] = [
+    'description' => 'testtask schema',
+    'fields' => [
+      'id' => [
+        'description' => 'id',
+        'type' => 'serial',
+        'size' => 'small',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'name' => [
+        'description' => 'exchanger name',
+        'type' => 'varchar',
+        'length' => 100,
+        'default' => '',
+        'not null' => TRUE,
+      ],
+      'url' => [
+        'description' => 'latest url',
+        'type' => 'varchar',
+        'length' => 300,
+        'default' => '',
+        'not null' => TRUE,
+      ],
+      'key' => [
+        'description' => 'api key',
+        'type' => 'varchar',
+        'length' => 50,
+        'default' => '',
+        'not null' => TRUE,
+      ],
+      'updated' => [
+        'description' => 'last updated',
+        'mysql_type' => 'datetime',
+      ],
+
+    ],
+    'primary key' => ['id'],
+  ];
+
+  return $schema;
+
+}

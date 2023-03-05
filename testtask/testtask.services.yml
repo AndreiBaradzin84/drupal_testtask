@@ -1,0 +1,6 @@
+services:
+
+  # Defines a simple service which requires no parameter for its constructor.
+  testtask.exchanger:
+    class: Drupal\testtask\Service\ExchangerService
+    arguments: [ '@database', '@http_client' ]
