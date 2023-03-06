@@ -117,14 +117,5 @@ class adminForm extends FormBase {
 
   }
 
-  /**
-   * @param array $form
-   * @param FormStateInterface $form_state
-   *
-   * @return void
-   */
-  public function validateForm(array &$form, FormStateInterface $form_state): void {
-
-  }
-
 }
+

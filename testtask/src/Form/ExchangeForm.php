@@ -71,10 +71,6 @@ class exchangeForm extends FormBase {
       '#options' => $currencies,
       '#required' => TRUE,
     ];
-    $form['result'] = [
-      '#type' => 'label',
-      '#value' => 'dadsadasdasdas',
-    ];
 
     $form['actions']['submit'] = [
       '#type' => 'submit',
@@ -109,15 +105,5 @@ class exchangeForm extends FormBase {
       ->addMessage(t('You have just exchanged ' . $amount . $result['from']['code'] .
         ' to ' . $result['result'] . $result['to']['code']));
   }
-
-  /**
-   * @param array $form
-   * @param FormStateInterface $form_state
-   *
-   * @return void
-   */
-  public function validateForm(array &$form, FormStateInterface $form_state): void {
-
-  }
-
 }
+
